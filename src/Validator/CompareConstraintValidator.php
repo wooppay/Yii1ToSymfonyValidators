@@ -26,49 +26,27 @@ class CompareConstraintValidator extends ConstraintValidator
         $params = $constraint->getParams();
 
         if ($params['allowEmpty'] == false && empty($value)) {
-            $this->context->buildViolation($constraint->message)
-                ->setParameter('{{ string }}', $this->translator->trans('emptyValue', [], 'test'))
-                ->addViolation();
+            $this->addViolation('emptyValue');
         } else {
             switch ($params['operator']) {
                 case '>':
                     if ($value <= $params['compareValue']) {
-                        $this->context->buildViolation($constraint->message)
-                            ->setParameter('{{ string }}', $this->translator->trans('valueShouldBeGreaterThan', [
-                                '%value%' => $params['compareValue']
-                            ], 'test'))
-                            ->addViolation()
-                        ;
+                        $this->addViolation('valueShouldBeGreaterThan', $params['compareValue']);
                     }
                     break;
                 case '<':
                     if ($value >= $params['compareValue']) {
-                        $this->context->buildViolation($constraint->message)
-                            ->setParameter('{{ string }}', $this->translator->trans('valueShouldBeLessThan', [
-                                '%value%' => $params['compareValue']
-                            ], 'test'))
-                            ->addViolation()
-                        ;
+                        $this->addViolation('valueShouldBeLessThan', $params['compareValue']);
                     }
                     break;
                 case '>=':
                     if ($value < $params['compareValue']) {
-                        $this->context->buildViolation($constraint->message)
-                            ->setParameter('{{ string }}', $this->translator->trans('valueShouldBeEqualOrGreaterThan', [
-                                '%value%' => $params['compareValue']
-                            ], 'test'))
-                            ->addViolation()
-                        ;
+                        $this->addViolation('valueShouldBeEqualOrGreaterThan', $params['compareValue']);
                     }
                     break;
                 case '<=':
                     if ($value > $params['compareValue']) {
-                        $this->context->buildViolation($constraint->message)
-                            ->setParameter('{{ string }}', $this->translator->trans('valueShouldBeEqualOrLessThan', [
-                                '%value%' => $params['compareValue']
-                            ], 'test'))
-                            ->addViolation()
-                        ;
+                        $this->addViolation('valueShouldBeEqualOrLessThan', $params['compareValue']);
                     }
                     break;
             }
@@ -77,22 +55,12 @@ class CompareConstraintValidator extends ConstraintValidator
                 switch ($params['operator']) {
                     case '=':
                         if ($value !== $params['compareValue']) {
-                            $this->context->buildViolation($constraint->message)
-                                ->setParameter('{{ string }}', $this->translator->trans('valueShouldBeEqual', [
-                                    '%value%' => $params['compareValue']
-                                ], 'test'))
-                                ->addViolation()
-                            ;
+                            $this->addViolation('valueShouldBeEqual', $params['compareValue']);
                         }
                         break;
                     case '!=':
                         if ($value === $params['compareValue']) {
-                            $this->context->buildViolation($constraint->message)
-                                ->setParameter('{{ string }}', $this->translator->trans('valueShouldNotBeEqual', [
-                                    '%value%' => $params['compareValue']
-                                ], 'test'))
-                                ->addViolation()
-                            ;
+                            $this->addViolation('valueShouldNotBeEqual', $params['compareValue']);
                         }
                         break;
                 }
@@ -100,26 +68,26 @@ class CompareConstraintValidator extends ConstraintValidator
                 switch ($params['operator']) {
                     case '=':
                         if ($value != $params['compareValue']) {
-                            $this->context->buildViolation($constraint->message)
-                                ->setParameter('{{ string }}', $this->translator->trans('valueShouldBeEqual', [
-                                    '%value%' => $params['compareValue']
-                                ], 'test'))
-                                ->addViolation()
-                            ;
+                            $this->addViolation('valueShouldBeEqual', $params['compareValue']);
                         }
                         break;
                     case '!=':
                         if ($value == $params['compareValue']) {
-                            $this->context->buildViolation($constraint->message)
-                                ->setParameter('{{ string }}', $this->translator->trans('valueShouldNotBeEqual', [
-                                    '%value%' => $params['compareValue']
-                                ], 'test'))
-                                ->addViolation()
-                            ;
+                            $this->addViolation('valueShouldNotBeEqual', $params['compareValue']);
                         }
                         break;
                 }
             }
         }
+    }
+
+    private function addViolation(string $text, string $value = null)
+    {
+        $this->context->buildViolation($constraint->message)
+            ->setParameter('{{ string }}', $this->translator->trans($text, [
+                (!$value) ? null : '%value%' => $value
+            ], 'validation'))
+            ->addViolation()
+        ;
     }
 }
