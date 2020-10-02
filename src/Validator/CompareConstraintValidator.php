@@ -81,7 +81,7 @@ class CompareConstraintValidator extends ConstraintValidator
         }
     }
 
-    private function addViolation(string $text, string $value = null)
+    private function addViolation(Constraint $constraint, string $text, string $value = null)
     {
         $this->context->buildViolation($constraint->message)
             ->setParameter('{{ string }}', $this->translator->trans($text, [
