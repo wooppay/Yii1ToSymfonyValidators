@@ -9,8 +9,7 @@ class Configuration implements ConfigurationInterface
 {
     public function getConfigTreeBuilder()
     {
-        $treeBuilder = new TreeBuilder();
-        $treeBuilder->root('yii_to_symfony_validators');
+        $treeBuilder = new TreeBuilder('yii_to_symfony_validators');
         return $treeBuilder;
     }
 }
