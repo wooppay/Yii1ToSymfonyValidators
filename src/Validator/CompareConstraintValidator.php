@@ -26,27 +26,27 @@ class CompareConstraintValidator extends ConstraintValidator
         $params = $constraint->getParams();
 
         if ($params['allowEmpty'] == false && empty($value)) {
-            $this->addViolation('emptyValue');
+            $this->addViolation($constraint, 'emptyValue');
         } else {
             switch ($params['operator']) {
                 case '>':
                     if ($value <= $params['compareValue']) {
-                        $this->addViolation('valueShouldBeGreaterThan', $params['compareValue']);
+                        $this->addViolation($constraint, 'valueShouldBeGreaterThan', $params['compareValue']);
                     }
                     break;
                 case '<':
                     if ($value >= $params['compareValue']) {
-                        $this->addViolation('valueShouldBeLessThan', $params['compareValue']);
+                        $this->addViolation($constraint, 'valueShouldBeLessThan', $params['compareValue']);
                     }
                     break;
                 case '>=':
                     if ($value < $params['compareValue']) {
-                        $this->addViolation('valueShouldBeEqualOrGreaterThan', $params['compareValue']);
+                        $this->addViolation($constraint, 'valueShouldBeEqualOrGreaterThan', $params['compareValue']);
                     }
                     break;
                 case '<=':
                     if ($value > $params['compareValue']) {
-                        $this->addViolation('valueShouldBeEqualOrLessThan', $params['compareValue']);
+                        $this->addViolation($constraint, 'valueShouldBeEqualOrLessThan', $params['compareValue']);
                     }
                     break;
             }
@@ -55,12 +55,12 @@ class CompareConstraintValidator extends ConstraintValidator
                 switch ($params['operator']) {
                     case '=':
                         if ($value !== $params['compareValue']) {
-                            $this->addViolation('valueShouldBeEqual', $params['compareValue']);
+                            $this->addViolation($constraint, 'valueShouldBeEqual', $params['compareValue']);
                         }
                         break;
                     case '!=':
                         if ($value === $params['compareValue']) {
-                            $this->addViolation('valueShouldNotBeEqual', $params['compareValue']);
+                            $this->addViolation($constraint, 'valueShouldNotBeEqual', $params['compareValue']);
                         }
                         break;
                 }
@@ -68,12 +68,12 @@ class CompareConstraintValidator extends ConstraintValidator
                 switch ($params['operator']) {
                     case '=':
                         if ($value != $params['compareValue']) {
-                            $this->addViolation('valueShouldBeEqual', $params['compareValue']);
+                            $this->addViolation($constraint, 'valueShouldBeEqual', $params['compareValue']);
                         }
                         break;
                     case '!=':
                         if ($value == $params['compareValue']) {
-                            $this->addViolation('valueShouldNotBeEqual', $params['compareValue']);
+                            $this->addViolation($constraint, 'valueShouldNotBeEqual', $params['compareValue']);
                         }
                         break;
                 }
