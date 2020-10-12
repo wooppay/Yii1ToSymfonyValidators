@@ -108,3 +108,9 @@ Keys for translations
 
 2. RequiredConstraint
 - **emptyValue**: contains message that value should not be empty;
+
+3.NumericalConstraint
+- **emptyValue**: contains message that value should not be empty;
+- **invalidNumberFormat**: contains message that value has invalid format;
+- **numberTooSmall**: contains message that value is too small than **%value%**;
+- **numberTooBig**: contains message that value is too big than **%value%**;
