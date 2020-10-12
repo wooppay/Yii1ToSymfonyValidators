@@ -102,6 +102,9 @@ Keys for translations
 - **valueShouldBeGreaterThan**: contains message that value should be greater than **%value%**;
 - **valueShouldBeLessThan**: contains message that value should be less than **%value%**;
 - **valueShouldBeEqualOrGreaterThan**: contains message that value should be equal or greater than **%value%**;
-- **valueShouldBeEqualOrLessThan**: contains message that value should be greater than **%value%**;
+- **valueShouldBeEqualOrLessThan**: contains message that value should be equal or less than **%value%**;
 - **valueShouldBeEqual**: contains message that value should be equal to **%value%**;
 - **valueShouldNotBeEqual**: contains message that value should not be equal to **%value%**;
+
+2. RequiredConstraint
+- **emptyValue**: contains message that value should not be empty;
