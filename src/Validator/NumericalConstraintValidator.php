@@ -27,28 +27,22 @@ class NumericalConstraintValidator extends ConstraintValidator
 
         if ($params['allowEmpty'] == false && empty($value)) {
             $this->addViolation($constraint, 'emptyValue');
-        }
-
-        if ($params['integerOnly'] == true) {
-            $number = preg_match('/^\s*[+-]?\d+\s*$/', $value);
-            
-            if ($number != $value) {
-                $this->addViolation($constraint, 'invalidNumberFormat');
-            }
         } else {
-            $number = preg_match('/^\s*[-+]?[0-9]*\.?[0-9]+([eE][-+]?[0-9]+)?\s*$/', $value);
-            
-            if ($number != $value) {
-                $this->addViolation($constraint, 'invalidNumberFormat');
+            if ($params['integerOnly'] == true) {
+                if (!preg_match("/^\s*[+-]?\d+\s*$/", $value)) {
+                    $this->addViolation($constraint, 'invalidNumberFormat');
+                }
+            } else {
+                if (!preg_match('/^\s*[-+]?[0-9]*\.?[0-9]+([eE][-+]?[0-9]+)?\s*$/', $value)) {
+                    $this->addViolation($constraint, 'invalidNumberFormat');
+                }
             }
-        }
-
-        if (isset($number)) {
-            if ($number < $params['min']) {
+    
+            if ($value < $params['min']) {
                 $this->addViolation($constraint, 'numberTooSmall', $params['min']);
             }
-
-            if ($number > $params['max']) {
+    
+            if ($value > $params['max']) {
                 $this->addViolation($constraint, 'numberTooBig', $params['max']);
             }
         }
