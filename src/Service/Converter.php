@@ -4,6 +4,7 @@ namespace wooppay\YiiToSymfonyValidatorsBundle\Service;
 
 use Symfony\Component\Validator\Constraint;
 use wooppay\YiiToSymfonyValidatorsBundle\Validator\CompareConstraint;
+use wooppay\YiiToSymfonyValidatorsBundle\Validator\RequiredConstraint;
 
 class Converter
 {
@@ -12,6 +13,8 @@ class Converter
         switch ($type) {
             case 'compare':
                 return new CompareConstraint($params);
+            case 'required':
+                return new RequiredConstraint($params);
         }
     }
 }
