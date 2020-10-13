@@ -8,7 +8,7 @@ use Symfony\Component\Validator\ConstraintValidator;
 use Symfony\Component\Validator\Exception\UnexpectedTypeException;
 use Symfony\Component\Validator\Exception\UnexpectedValueException;
 
-class NumericalConstraintValidator extends ConstraintValidator
+class LengthConstraintValidator extends ConstraintValidator
 {
     private $translator;
 
@@ -19,8 +19,8 @@ class NumericalConstraintValidator extends ConstraintValidator
 
     public function validate($value, Constraint $constraint)
     {
-        if (!$constraint instanceof NumericalConstraint) {
-            throw new UnexpectedTypeException($constraint, NumericalConstraint::class);
+        if (!$constraint instanceof LengthConstraint) {
+            throw new UnexpectedTypeException($constraint, LengthConstraint::class);
         }
 
         $params = $constraint->getParams();
@@ -28,22 +28,20 @@ class NumericalConstraintValidator extends ConstraintValidator
         if ($params['allowEmpty'] == false && empty($value)) {
             $this->addViolation($constraint, 'emptyValue');
         } else {
-            if ($params['integerOnly'] == true) {
-                if (!preg_match("/^\s*[+-]?\d+\s*$/", $value)) {
-                    $this->addViolation($constraint, 'invalidNumberFormat');
-                }
-            } else {
-                if (!preg_match('/^\s*[-+]?[0-9]*\.?[0-9]+([eE][-+]?[0-9]+)?\s*$/', $value)) {
-                    $this->addViolation($constraint, 'invalidNumberFormat');
-                }
+            if (!empty($params['encoding'])) {
+                $value = mb_convert_encoding($value, $params['encoding']);
             }
-    
-            if ($value < $params['min']) {
-                $this->addViolation($constraint, 'numberTooSmallThan', $params['min']);
+
+            if (!empty($params['is']) && strlen($value) != $params['is']) {
+                $this->addViolation($constraint, 'lengthShouldBeEqualTo', $params['is']);
             }
-    
-            if ($value > $params['max']) {
-                $this->addViolation($constraint, 'numberTooBigThan', $params['max']);
+
+            if (strlen($value) < $params['min']) {
+                $this->addViolation($constraint, 'stringTooShortThan', $params['min']);
+            }
+
+            if (strlen($value) > $params['max']) {
+                $this->addViolation($constraint, 'stringTooLongThan', $params['max']);
             }
         }
     }
