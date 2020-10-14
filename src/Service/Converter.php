@@ -7,6 +7,7 @@ use wooppay\YiiToSymfonyValidatorsBundle\Validator\CompareConstraint;
 use wooppay\YiiToSymfonyValidatorsBundle\Validator\RequiredConstraint;
 use wooppay\YiiToSymfonyValidatorsBundle\Validator\NumericalConstraint;
 use wooppay\YiiToSymfonyValidatorsBundle\Validator\LengthConstraint;
+use wooppay\YiiToSymfonyValidatorsBundle\Validator\MatchConstraint;
 
 class Converter
 {
@@ -21,6 +22,8 @@ class Converter
                 return new NumericalConstraint($params);
             case 'length':
                 return new LengthConstraint($params);
+            case 'match':
+                return new MatchConstraint($params);
         }
     }
 }
