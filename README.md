@@ -124,3 +124,8 @@ Keys for translations
 5. MatchConstraint
 - **emptyValue**: contains message that value should not be empty;
 - **invalidFormat**: contains message that value has invalid format;
+
+6. InConstraint
+- **emptyValue**: contains message that value should not be empty;
+- **valueShouldBeInList**: contains message that value should be in the list of **%value%**;
+- **valueShouldNotBeInList**: contains message that value should not be in the list of **%value%**;

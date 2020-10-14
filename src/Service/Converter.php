@@ -8,6 +8,7 @@ use wooppay\YiiToSymfonyValidatorsBundle\Validator\RequiredConstraint;
 use wooppay\YiiToSymfonyValidatorsBundle\Validator\NumericalConstraint;
 use wooppay\YiiToSymfonyValidatorsBundle\Validator\LengthConstraint;
 use wooppay\YiiToSymfonyValidatorsBundle\Validator\MatchConstraint;
+use wooppay\YiiToSymfonyValidatorsBundle\Validator\InConstraint;
 
 class Converter
 {
@@ -24,6 +25,8 @@ class Converter
                 return new LengthConstraint($params);
             case 'match':
                 return new MatchConstraint($params);
+            case 'in':
+                return new InConstraint($params);
         }
     }
 }
