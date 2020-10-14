@@ -120,3 +120,7 @@ Keys for translations
 - **lengthShouldBeEqualTo**: contains message that value length should be equal to **%value%**;
 - **stringTooShortThan**: contains message that value length is too short than **%value%**;
 - **stringTooLongThan**: contains message that value length is too long than **%value%**;
+
+5. MatchConstraint
+- **emptyValue**: contains message that value should not be empty;
+- **invalidFormat**: contains message that value has invalid format;
