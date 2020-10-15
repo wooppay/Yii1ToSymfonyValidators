@@ -33,21 +33,21 @@ class InConstraintValidator extends ConstraintValidator
             if ($params['strict'] == false) {
                 if ($params['not'] == false) {
                     if (!in_array($value, $range)) {
-                        $this->addViolation($constraint, 'valueShouldBeInList', implode(', ', $params['range']));
+                        $this->addViolation($constraint, 'valueShouldBeInList', $params['range']);
                     }
                 } else {
                     if (in_array($value, range)) {
-                        $this->addViolation($constraint, 'valueShouldNotBeInList', implode(', ', $params['range']));
+                        $this->addViolation($constraint, 'valueShouldNotBeInList', $params['range']);
                     }
                 }
             } else {
                 if ($params['not'] == false) {
                     if (!in_array($value, $range, true)) {
-                        $this->addViolation($constraint, 'valueShouldBeInList', implode(', ', $params['range']));
+                        $this->addViolation($constraint, 'valueShouldBeInList', $params['range']);
                     }
                 } else {
                     if (in_array($value, $range, true)) {
-                        $this->addViolation($constraint, 'valueShouldNotBeInList', implode(', ', $params['range']));
+                        $this->addViolation($constraint, 'valueShouldNotBeInList', $params['range']);
                     }
                 }
             }
