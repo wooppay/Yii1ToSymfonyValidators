@@ -29,11 +29,11 @@ class MatchConstraintValidator extends ConstraintValidator
             $this->addViolation($constraint, 'emptyValue');
         } else {
             if (filter_var($params['not'], FILTER_VALIDATE_BOOLEAN)) {
-                if (!preg_match($params['pattern'], $value)) {
+                if (preg_match($params['pattern'], $value)) {
                     $this->addViolation($constraint, 'invalidFormat');
                 }
             } else {
-                if (preg_match($params['pattern'], $value)) {
+                if (!preg_match($params['pattern'], $value)) {
                     $this->addViolation($constraint, 'invalidFormat');
                 }
             }
