@@ -32,16 +32,18 @@ class LengthConstraintValidator extends ConstraintValidator
                 $value = mb_convert_encoding($value, $params['encoding']);
             }
 
-            if (!empty($params['is']) && strlen($value) != $params['is']) {
-                $this->addViolation($constraint, 'lengthShouldBeEqualTo', $params['is']);
-            }
-
-            if (strlen($value) < $params['min']) {
-                $this->addViolation($constraint, 'stringTooShortThan', $params['min']);
-            }
-
-            if (strlen($value) > $params['max']) {
-                $this->addViolation($constraint, 'stringTooLongThan', $params['max']);
+            if (!empty($params['is'])) {
+                if (strlen($value) != $params['is']) {
+                    $this->addViolation($constraint, 'lengthShouldBeEqualTo', $params['is']);
+                }
+            } else {
+                if (strlen($value) < $params['min']) {
+                    $this->addViolation($constraint, 'stringTooShortThan', $params['min']);
+                }
+    
+                if (strlen($value) > $params['max']) {
+                    $this->addViolation($constraint, 'stringTooLongThan', $params['max']);
+                }
             }
         }
     }
