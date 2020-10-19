@@ -25,24 +25,24 @@ class NumericalConstraintValidator extends ConstraintValidator
 
         $params = $constraint->getParams();
 
-        if ($params['allowEmpty'] == false && empty($value)) {
+        if (!filter_var($params['allowEmpty'], FILTER_VALIDATE_BOOLEAN) && empty($value)) {
             $this->addViolation($constraint, 'emptyValue');
         } else {
-            if ($params['integerOnly'] == true) {
-                if (!preg_match("/^\s*[+-]?\d+\s*$/", $value)) {
+            if (filter_var($params['integerOnly'], FILTER_VALIDATE_BOOLEAN)) {
+                if (!preg_match($params['integerPattern'], $value)) {
                     $this->addViolation($constraint, 'invalidNumberFormat');
                 }
             } else {
-                if (!preg_match('/^\s*[-+]?[0-9]*\.?[0-9]+([eE][-+]?[0-9]+)?\s*$/', $value)) {
+                if (!preg_match($params['numberPattern'], $value)) {
                     $this->addViolation($constraint, 'invalidNumberFormat');
                 }
             }
     
-            if ($value < $params['min']) {
+            if (!empty($params['min']) && $value < $params['min']) {
                 $this->addViolation($constraint, 'numberTooSmallThan', $params['min']);
             }
     
-            if ($value > $params['max']) {
+            if (!empty($params['max']) && $value > $params['max']) {
                 $this->addViolation($constraint, 'numberTooBigThan', $params['max']);
             }
         }

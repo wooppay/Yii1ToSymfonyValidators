@@ -25,10 +25,10 @@ class MatchConstraintValidator extends ConstraintValidator
 
         $params = $constraint->getParams();
 
-        if ($params['allowEmpty'] == false && empty($value)) {
+        if (!filter_var($params['allowEmpty'], FILTER_VALIDATE_BOOLEAN) && empty($value)) {
             $this->addViolation($constraint, 'emptyValue');
         } else {
-            if ($params['not'] == false) {
+            if (filter_var($params['not'], FILTER_VALIDATE_BOOLEAN)) {
                 if (!preg_match($params['pattern'], $value)) {
                     $this->addViolation($constraint, 'invalidFormat');
                 }
