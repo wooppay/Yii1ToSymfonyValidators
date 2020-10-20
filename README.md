@@ -102,6 +102,30 @@ Keys for translations
 - **valueShouldBeGreaterThan**: contains message that value should be greater than **%value%**;
 - **valueShouldBeLessThan**: contains message that value should be less than **%value%**;
 - **valueShouldBeEqualOrGreaterThan**: contains message that value should be equal or greater than **%value%**;
-- **valueShouldBeEqualOrLessThan**: contains message that value should be greater than **%value%**;
+- **valueShouldBeEqualOrLessThan**: contains message that value should be equal or less than **%value%**;
 - **valueShouldBeEqual**: contains message that value should be equal to **%value%**;
 - **valueShouldNotBeEqual**: contains message that value should not be equal to **%value%**;
+
+2. RequiredConstraint
+- **emptyValue**: contains message that value should not be empty;
+
+3. NumericalConstraint
+- **emptyValue**: contains message that value should not be empty;
+- **invalidNumberFormat**: contains message that value has invalid format;
+- **numberTooSmallThan**: contains message that value is too small than **%value%**;
+- **numberTooBigThan**: contains message that value is too big than **%value%**;
+
+4. LengthConstraint
+- **emptyValue**: contains message that value should not be empty;
+- **lengthShouldBeEqualTo**: contains message that value length should be equal to **%value%**;
+- **stringTooShortThan**: contains message that value length is too short than **%value%**;
+- **stringTooLongThan**: contains message that value length is too long than **%value%**;
+
+5. MatchConstraint
+- **emptyValue**: contains message that value should not be empty;
+- **invalidFormat**: contains message that value has invalid format;
+
+6. InConstraint
+- **emptyValue**: contains message that value should not be empty;
+- **valueShouldBeInList**: contains message that value should be in the list of **%value%**;
+- **valueShouldNotBeInList**: contains message that value should not be in the list of **%value%**;
