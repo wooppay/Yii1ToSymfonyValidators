@@ -37,11 +37,11 @@ class LengthConstraintValidator extends ConstraintValidator
                     $this->addViolation($constraint, 'lengthShouldBeEqualTo', $params['is']);
                 }
             } else {
-                if (strlen($value) < $params['min']) {
+                if (!empty($params['min']) && strlen($value) < $params['min']) {
                     $this->addViolation($constraint, 'stringTooShortThan', $params['min']);
                 }
     
-                if (strlen($value) > $params['max']) {
+                if (!empty($params['max']) && strlen($value) > $params['max']) {
                     $this->addViolation($constraint, 'stringTooLongThan', $params['max']);
                 }
             }
