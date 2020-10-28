@@ -10,10 +10,11 @@ use wooppay\YiiToSymfonyValidatorsBundle\Validator\LengthConstraint;
 use wooppay\YiiToSymfonyValidatorsBundle\Validator\MatchConstraint;
 use wooppay\YiiToSymfonyValidatorsBundle\Validator\InConstraint;
 use wooppay\YiiToSymfonyValidatorsBundle\Validator\DateConstraint;
+use wooppay\YiiToSymfonyValidatorsBundle\Validator\EmailConstraint;
 
 class Converter
 {
-    public function toSymfonyValidator(string $type, array $params): Constraint
+    public function toSymfonyValidator(string $type, array $params): ?Constraint
     {
         switch ($type) {
             case 'compare':
@@ -30,6 +31,10 @@ class Converter
                 return new InConstraint($params);
             case 'date':
                 return new DateConstraint($params);
+            case 'email':
+                return new EmailConstraint($params);
+            default:
+                return null;
         }
     }
 }

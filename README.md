@@ -129,3 +129,7 @@ Keys for translations
 - **emptyValue**: contains message that value should not be empty;
 - **valueShouldBeInList**: contains message that value should be in the list of **%value%**;
 - **valueShouldNotBeInList**: contains message that value should not be in the list of **%value%**;
+
+7. EmailConstraint
+- **emptyValue**: contains message that value should not be empty;
+- **invalidEmailFormat**: contains message that value has invalid format;
