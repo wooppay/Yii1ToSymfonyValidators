@@ -13,7 +13,7 @@ use wooppay\YiiToSymfonyValidatorsBundle\Validator\DateConstraint;
 
 class Converter
 {
-    public function toSymfonyValidator(string $type, array $params): Constraint
+    public function toSymfonyValidator(string $type, array $params): ?Constraint
     {
         switch ($type) {
             case 'compare':
@@ -30,6 +30,8 @@ class Converter
                 return new InConstraint($params);
             case 'date':
                 return new DateConstraint($params);
+            default:
+                return null;
         }
     }
 }
